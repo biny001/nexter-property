@@ -12,7 +12,9 @@ async function fetchProperties() {
     if (!res.ok) {
       throw new Error("Error while getting data");
     }
-    return res.json();
+    const data = await res.json();
+
+    return data;
   } catch (error) {
     console.log(error);
     return [];

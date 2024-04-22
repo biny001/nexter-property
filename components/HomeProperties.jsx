@@ -3,8 +3,9 @@ import { fetchProperties } from "@/utils/requests";
 import PropertyCard from "./PropertyCard";
 import Link from "next/link";
 
-const HomeProperties = () => {
-  const properties = fetchProperties();
+const HomeProperties = async () => {
+  const properties = await fetchProperties();
+
   const recentProperties = Array.isArray(properties)
     ? properties
         .slice() // Make a shallow copy of properties array
