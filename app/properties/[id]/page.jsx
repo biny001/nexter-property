@@ -1,14 +1,47 @@
 "use client";
-const PropertyPage = () => {
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { fetchPropertyById } from "@/utils/requests.js";
+import PropertyHeader from "@/components/PropertyHeader";
+
+const PropertyPage = async () => {
+  const { id } = useParams();
+  const [property, setProperty] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPropertyData = async () => {
+      if (!id) return;
+      try {
+        const propertyData = await fetchPropertyById(id);
+        setProperty(propertyData);
+      } catch (err) {
+        console.log("error fetching property by id");
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (property === null) {
+      fetchPropertyData();
+    }
+  }, [id, property]);
+
+  if (!property && !loading) {
+    return (
+      <h1 className=" text-center   text-2xl font-bold ">Property not found</h1>
+    );
+  }
+
   return (
-    <div>
-      <button
-        onClick={() => router.push("/?hello=world")}
-        className=" bg-blue-500 px-6 py-4 rounded-lg text-white"
-      >
-        Go home
-      </button>
-    </div>
+    <>
+      {!loading && property && (
+        <>
+          <PropertyHeader image={property?.images[0]} />
+        </>
+      )}
+    </>
   );
 };
 
