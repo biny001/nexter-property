@@ -1,10 +1,19 @@
-"use client";
+// "use client";
 import { fetchProperties } from "@/utils/requests";
 import PropertyCard from "./PropertyCard";
 import Link from "next/link";
+// import { useEffect, useState } from "react";
 
 const HomeProperties = async () => {
   const properties = await fetchProperties();
+
+  // useEffect(() => {
+  //   const getProperties = async () => {
+
+  //     setProperties(properties);
+  //   };
+  //   getProperties();
+  // }, []);
 
   const recentProperties = Array.isArray(properties)
     ? properties
