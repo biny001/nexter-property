@@ -6,6 +6,8 @@ import { useSession } from "next-auth/react";
 import profileDefault from "@/assets/images/profile.png";
 import Spinner from "@/components/Spinner";
 
+import { toast } from "react-toastify";
+
 const ProfilePage = () => {
   const { data: session } = useSession();
   const profileImage = session?.user?.image;
@@ -51,10 +53,10 @@ const ProfilePage = () => {
         );
 
         setProperties(updatedProperties);
-        alert("properties Deleted");
+        toast.success("Property deleted successfully");
       }
     } catch (err) {
-      console.log(err);
+      toast.error("An error occurred. Please try again");
     }
   };
   return (

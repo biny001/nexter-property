@@ -18,6 +18,6 @@ export const getSessionUser = async () => {
   }
   {
     console.err(err);
-    return nulll;
+    return null;
   }
 };
