@@ -22,7 +22,7 @@ const PropertyMap = ({ property }) => {
   });
   const [geocodeError, setGeocodeError] = useState(false);
   const [loading, setLoading] = useState(true);
-  console.log("FIRESTONE PARK, CA 90001,USA");
+  // console.log("FIRESTONE PARK, CA 90001,USA");
 
   useEffect(() => {
     const fetchCoords = async () => {
@@ -44,7 +44,7 @@ const PropertyMap = ({ property }) => {
         setLat(lat);
         setLng(lng);
         setViewport({ ...viewport, latitude: lat, longitude: lng });
-        console.log(lat, lng);
+        // console.log(lat, lng);
         setLoading(false);
       } catch (error) {
         console.log(error);

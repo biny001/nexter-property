@@ -5,6 +5,27 @@ import { getSessionUser } from "@/utils/getSessionUser";
 
 export const dynamic = "force-dynamic";
 
+export const GET = async (request) => {
+  try {
+    await connectDB();
+
+    const userSession = await getSessionUser();
+
+    if (!userSession || !userSession.userId) {
+      return new Response("User Id is required", { status: 401 });
+    }
+
+    const user = await User.findOne({ _id: userSession.userId });
+
+    const property = await Property.find({ _id: { $in: user.bookmarks } });
+    // console.log(property);
+
+    return new Response(JSON.stringify(property), { status: 200 });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const POST = async (request) => {
   try {
     await connectDB();
@@ -29,6 +50,7 @@ export const POST = async (request) => {
       //if already bookmarked,remove it
       user.bookmarks.pull(propertyId);
       message = "Bookmark removed successfully";
+      isBookmarked = false;
     } else {
       //If not bookmarked,add it
       user.bookmarks.push(propertyId);

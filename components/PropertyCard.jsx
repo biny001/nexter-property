@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 
 const PropertyCard = ({ property }) => {
+  console.log("this is my property", property);
   const getRateDisplay = () => {
     if (!property || !property.rates) {
       return "Rates not available"; // Handle case where rates are missing
