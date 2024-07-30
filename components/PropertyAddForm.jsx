@@ -480,6 +480,7 @@ const PropertyAddForm = () => {
                 name="rates.monthly"
                 className="border rounded w-full py-2 px-3"
                 value={fields.rates.monthly}
+                onChange={handleChange}
               />
             </div>
             <div className="flex items-center">
@@ -495,6 +496,7 @@ const PropertyAddForm = () => {
                 name="rates.nightly"
                 className="border rounded w-full py-2 px-3"
                 value={fields.rates.nightly}
+                onChange={handleChange}
               />
             </div>
           </div>
